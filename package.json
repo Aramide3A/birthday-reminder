@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "start": "node ./dist/index.js && npm run prisma:generate",
-    "build": "npm install && tsc",
-    "prisma:generate": "prisma generate"
-  },
+  "build": "tsc && npx prisma generate",
+  "start": "node ./dist/index.js",
+  "dev": "ts-node-dev --respawn src/index.ts"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
