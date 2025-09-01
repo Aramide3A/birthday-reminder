@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, 'views', 'form.html'))
+    res.sendFile(path.join(process.cwd(), 'src/views/form.html'))
 })
 
 app.get('/birthday', async (req: Request, res: Response) => {
