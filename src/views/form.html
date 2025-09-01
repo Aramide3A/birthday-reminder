@@ -1,0 +1,48 @@
+<form id="birthdayForm">
+  <label>Email:</label>
+  <input type="email" name="email" required><br><br>
+
+  <label>Username:</label>
+  <input type="text" name="username" required><br><br>
+
+  <label>Birthday:</label>
+  <input type="date" name="birthday" required><br><br>
+
+  <button type="submit">Save Birthday</button>
+</form>
+
+<p id="response"></p>
+
+<script>
+  const form = document.getElementById("birthdayForm");
+  const responseEl = document.getElementById("response");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // prevent page reload
+
+    const formData = new FormData(form);
+    const data = {
+      email: formData.get("email"),
+      username: formData.get("username"),
+      birthday: formData.get("birthday"),
+    };
+
+    try {
+      const res = await fetch("/birthday", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      responseEl.textContent = result.message;
+      responseEl.style.color = "green";
+
+      form.reset(); 
+    } catch (err) {
+      console.error(err);
+      responseEl.textContent = "Error saving birthday!";
+      responseEl.style.color = "red";
+    }
+  });
+</script>
